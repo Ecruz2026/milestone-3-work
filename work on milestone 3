@@ -1,0 +1,54 @@
+# Emmanuel Cruz
+
+# Nov 24, 2024
+
+# Print the options
+
+# Ask user to input
+
+# Send user to different branch based on choice
+
+def chapter1():
+    print("Welcome back and pick other options")
+    return options
+
+options =["Start interacting","Go shopping in the village market","Go back home","Go explore"]
+for index, str in enumerate(options):
+    print(f"{index+1}. {str.capitalize()}")
+
+choice = int(input("Choose a number from the list!"))
+if choice == 1:
+    print("Walk up to the villagers.")
+elif choice == 2:
+    print("Walk up to the market.")
+
+
+
+
+choice1 = input("Do you want to speak with the villagers? (y/n): ")
+if choice1 == "y":
+    print("Gain info on the village")
+    
+
+def choice1():
+    print()
+
+elif choice1 == "n":
+    print("You get no info and have your own thoughts")
+
+else:
+    print("Invalid input, please enter y/n")
+
+chapter1()
+
+
+
+choice2 = input("Will you buy heals? (y/n): ")
+if choice2 == "y":
+    print("Get bread and water as healing.")
+    
+
+elif choice2 == "n":
+    print("Get nothing and continue on exploring")
+
+
