@@ -78,10 +78,9 @@ chapter1()
 
 def chapter2():
     print("\nWelcome to Chapter 2: The Forgotten Forest!")
-    
-    options = ["Check out the boulder","Ignore the boulder","Go back to the village"]
-       
-    
+
+    options = ["Check out the boulder", "Ignore the boulder", "Go back to the village"]
+
     while True:
         print("\nPlease choose an option:")
         for index, option in enumerate(options):
@@ -90,31 +89,46 @@ def chapter2():
         choice = input("Enter the option number (1-3): ")
 
         if choice == "1":
-            if check_boulder():  # If player proceeds to Chapter 3
-                break  # Move to Chapter 3
+            if check_boulder():  # If the player finds the note or opts not to check it, go to Chapter 1 or Chapter 3
+                break  # Exit Chapter 2 as options are no longer displayed
         elif choice == "2":
             if not ignore_boulder():  # If player dies, game over
-                break  # Loop to start over
+                break  # Exit and end the game
         elif choice == "3":
-            if go_back_to_village():  # If player returns to Chapter 1
-                break  # Go back to Chapter 1
+            if not go_back_to_village():  # If player chooses to go back or dies, options no longer available
+                break  # Exit and end the game
         else:
             print("Invalid choice. Please select a valid option (1-3).")
 
+# Define a function to represent Chapter 1 for navigation
+def chapter1():
+    print("\nWelcome to Chapter 1! The adventure begins...")
+    # Implement Chapter 1 story and options here, for simplicity we'll just end it for now.
+    print("You have returned to Chapter 1.")
+
+# Define a function for Chapter 3
+def chapter3():
+    print("\nWelcome to Chapter 3: The Next Step!")
+    # Implement Chapter 3 story and options here, for now just a placeholder message.
+    print("This is where your adventure continues...")
+
 def check_boulder():
     print("\nYou approach a large, mysterious boulder.")
-    while True:
-        decision = input("Do you want to check out the boulder? (yes/no): ").lower()
-        if decision == 'yes':
-            print("You find a note tucked under the boulder!")
-            print("The note talks about a tunnel in the village.")
-            print("Chapter 3 begins...")
-            return True  # Go to Chapter 3
-        elif decision == 'no':
-            print("You decide not to check out the boulder.")
-            break  # Go back to options
-        else:
-            print("Invalid input. Please type 'yes' or 'no'.")
+    decision = input("Do you want to check out the boulder? (yes/no): ").lower()
+    if decision == 'yes':
+        print("You find a note tucked under the boulder!")
+        print("The note says there is a tunnel in the village.")
+        print("Chapter 3 begins...")
+        chapter3()  # Call Chapter 3 directly
+        return True  # Indicate that the transition to Chapter 3 has occurred
+    elif decision == 'no':
+        print("You choose not to check the boulder and miss the note.")
+        print("You turn around and head back home.")
+        chapter1()  # Redirect to Chapter 1
+        return True  # Indicate return to Chapter 1
+    else:
+        print("Invalid input. Please type 'yes' or 'no'.")
+        return check_boulder()  # Re-prompt if input is invalid
 
 def ignore_boulder():
     print("\nYou choose to ignore the boulder.")
@@ -125,7 +139,7 @@ def ignore_boulder():
             print("Unfortunately, you get lost and die due to hunger. GAME OVER.")
             return False  # Game Over
         elif decision == 'no':
-            print("You decide to go back to find a clue.")
+            print("You decide to go back to find clues.")
             break  # Go back to options
         else:
             print("Invalid input. Please type 'yes' or 'no'.")
@@ -137,7 +151,8 @@ def go_back_to_village():
         decision = input("Do you want to go back to the village? (yes/no): ").lower()
         if decision == 'yes':
             print("You return to the village safely.")
-            return True  # Go back to Chapter 1
+            chapter1()  # Redirect to Chapter 1
+            return False  # Indicate options in Chapter 2 should no longer be available
         elif decision == 'no':
             print("You decide to stay out here.")
             print("Unfortunately, you get lost and die due to hunger. GAME OVER.")
@@ -145,5 +160,6 @@ def go_back_to_village():
         else:
             print("Invalid input. Please type 'yes' or 'no'.")
 
-# Start Chapter 2 by calling chapter2()
+
+# Main program execution starts here
 chapter2()
